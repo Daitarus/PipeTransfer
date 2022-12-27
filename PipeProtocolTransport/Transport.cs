@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO.Pipes;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO.Pipes;
 
 namespace PipeProtocolTransport
 {
     public sealed class Transport
     {
-        public const int maxLengthData = 524288000;   //500Mb
+        public const int maxLengthData = 16581375;   //16Mb
 
         PipeStream pipeStream;
 
@@ -33,6 +27,7 @@ namespace PipeProtocolTransport
 
             data = AddLength(data);
 
+            pipeStream.WaitForPipeDrain();
             pipeStream.Write(data, 0, data.Length);
         }
 

@@ -8,22 +8,20 @@ namespace CommandsKit
 
         public Command Define(byte[] buffer)
         {
-            if (buffer == null || buffer.Length == 0)
-                throw new ArgumentNullException(nameof(buffer));
+            TypeCommand typeCommand = TypeCommand.UNKNOW;
+            byte[] data = new byte[0];
 
-            TypeCommand typeCommand;
-            byte[] data = new byte[buffer.Length - 1];
-
-            if (Enum.IsDefined(typeof(TypeCommand), buffer[0]))
+            if (buffer != null && buffer.Length > 1)
             {
-                typeCommand = (TypeCommand)buffer[0];
-            }
-            else
-            {
-                typeCommand = TypeCommand.UNKNOW;
-            }
+                data = new byte[buffer.Length - 1];
 
-            Array.Copy(buffer, 1, data, 0, buffer.Length - 1);
+                if (Enum.IsDefined(typeof(TypeCommand), buffer[0]))
+                {
+                    typeCommand = (TypeCommand)buffer[0];
+                }
+
+                Array.Copy(buffer, 1, data, 0, buffer.Length - 1);
+            }
 
             Assigment assigment = ChooseCommand(typeCommand);
 
@@ -34,9 +32,9 @@ namespace CommandsKit
         {
             switch (typeCommand)
             {
-                case TypeCommand.UNKNOW:
+                case TypeCommand.FILE_REQUEST:
                     {
-                        return UnknowCom.ToCommand;
+                        return FileRequest.ToCommand;
                     }                
                 default:
                     {

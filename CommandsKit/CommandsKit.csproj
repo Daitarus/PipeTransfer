@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Response\" />
-    <Folder Include="Commands\Request\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PipeProtocolTransport\PipeProtocolTransport.csproj" />
   </ItemGroup>
 

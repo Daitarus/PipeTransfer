@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PipeProtocolTransport", "Pi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{6099336A-2D1B-4947-8A4B-C8775DC2717C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandsKit", "CommandsKit\CommandsKit.csproj", "{A239628B-E8AE-4B36-AC6A-8A67C8AB62D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandsKit", "CommandsKit\CommandsKit.csproj", "{A239628B-E8AE-4B36-AC6A-8A67C8AB62D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

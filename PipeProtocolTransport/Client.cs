@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Pipes;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO.Pipes;
 
 namespace PipeProtocolTransport
 {
@@ -41,20 +33,23 @@ namespace PipeProtocolTransport
             }
         }
 
-        public void SendCommand(Command com)
+        public void SendCommand(Command command)
         {
-            Transport transport = new Transport(pipeStream);
-
-            byte[] buffer = com.ToBytes();
-
-            try
+            if (pipeStream.IsConnected)
             {
-                transport.SendData(buffer);
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine(ex.StackTrace);
+                Transport transport = new Transport(pipeStream);
+
+                byte[] buffer = command.ToBytes();
+
+                try
+                {
+                    transport.SendData(buffer);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                }
             }
         }
 
