@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using CommandsKit;
+using PipeProtocolTransport;
+using System.Text;
 
 namespace Client
 {
@@ -8,7 +10,8 @@ namespace Client
         {
             PipeProtocolTransport.Client client = new PipeProtocolTransport.Client("MyPipe", ".", 10000);
             client.Start();
-            client.SendByte(new byte[524288000]);
+            Command com = new UnknowCom(new byte[] { 0, 1, 2, 3 });
+            client.SendCommand(com);
             client.Close();
         }
     }

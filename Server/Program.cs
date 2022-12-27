@@ -1,4 +1,5 @@
 ﻿using PipeProtocolTransport;
+using CommandsKit;
 
 namespace Server
 {
@@ -6,7 +7,7 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            PipeProtocolTransport.Server server = new PipeProtocolTransport.Server("MyPipe");
+            PipeProtocolTransport.Server server = new PipeProtocolTransport.Server("MyPipe", new ComDeterminant());
             server.Start();
             server.Close();
         }

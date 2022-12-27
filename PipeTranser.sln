@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PipeProtocolTransport", "PipeProtocolTransport\PipeProtocolTransport.csproj", "{7055B971-4F23-4432-868A-9586799B83AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{6099336A-2D1B-4947-8A4B-C8775DC2717C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{6099336A-2D1B-4947-8A4B-C8775DC2717C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandsKit", "CommandsKit\CommandsKit.csproj", "{A239628B-E8AE-4B36-AC6A-8A67C8AB62D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{6099336A-2D1B-4947-8A4B-C8775DC2717C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6099336A-2D1B-4947-8A4B-C8775DC2717C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6099336A-2D1B-4947-8A4B-C8775DC2717C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A239628B-E8AE-4B36-AC6A-8A67C8AB62D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A239628B-E8AE-4B36-AC6A-8A67C8AB62D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A239628B-E8AE-4B36-AC6A-8A67C8AB62D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A239628B-E8AE-4B36-AC6A-8A67C8AB62D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

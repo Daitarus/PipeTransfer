@@ -4,11 +4,12 @@ using System.Security.Principal;
 
 namespace PipeProtocolTransport
 {
-    public class Server
+    public sealed class Server
     {       
         NamedPipeServerStream pipeStream;
+        IDeterminant determinant;
 
-        public Server(string pipeName)
+        public Server(string pipeName, IDeterminant determinant)
         {
             if (pipeName == null)
                 throw new ArgumentNullException(nameof(pipeName));
@@ -16,6 +17,7 @@ namespace PipeProtocolTransport
             PipeSecurity pipeSecurity = new PipeSecurity();
             pipeSecurity.AddAccessRule(new PipeAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), PipeAccessRights.ReadWrite, AccessControlType.Allow));
             pipeStream = NamedPipeServerStreamAcl.Create(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.None, 0, 0, pipeSecurity);
+            this.determinant = determinant;
         }
 
         public void Start()
@@ -27,7 +29,9 @@ namespace PipeProtocolTransport
 
                 while (pipeStream.IsConnected)
                 {
-                    byte[] data = transport.GetData();
+                    byte[] buffer = transport.GetData();
+                    Command com = determinant.Define(buffer);
+                    com.ExecuteCommand(transport);
                 }
             }
             catch(Exception ex)

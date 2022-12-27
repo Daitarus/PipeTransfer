@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PipeProtocolTransport
 {
-    internal class Transport
+    public sealed class Transport
     {
         public const int maxLengthData = 524288000;   //500Mb
 

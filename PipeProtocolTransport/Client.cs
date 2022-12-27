@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PipeProtocolTransport
 {
-    public class Client
+    public sealed class Client
     {
         private NamedPipeClientStream pipeStream;
         private int timeWaitConnection;
@@ -41,12 +41,15 @@ namespace PipeProtocolTransport
             }
         }
 
-        public void SendByte(byte[] bytes)
+        public void SendCommand(Command com)
         {
             Transport transport = new Transport(pipeStream);
+
+            byte[] buffer = com.ToBytes();
+
             try
             {
-                transport.SendData(bytes);
+                transport.SendData(buffer);
             }
             catch(Exception ex)
             {

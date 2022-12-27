@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CommandsKit\CommandsKit.csproj" />
     <ProjectReference Include="..\PipeProtocolTransport\PipeProtocolTransport.csproj" />
   </ItemGroup>
 
