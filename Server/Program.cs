@@ -7,7 +7,7 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            PipeProtocolTransport.Server server = new PipeProtocolTransport.Server("MyPipe", new ComDeterminant());
+            PptServer server = new PptServer("MyPipe", new ComDeterminant());
             server.Start();
             server.Close();
         }

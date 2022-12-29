@@ -4,12 +4,12 @@ using System.Security.Principal;
 
 namespace PipeProtocolTransport
 {
-    public sealed class Server
+    public sealed class PptServer
     {       
         NamedPipeServerStream pipeStream;
         IDeterminant determinant;
 
-        public Server(string pipeName, IDeterminant determinant)
+        public PptServer(string pipeName, IDeterminant determinant)
         {
             if (pipeName == null)
                 throw new ArgumentNullException(nameof(pipeName));

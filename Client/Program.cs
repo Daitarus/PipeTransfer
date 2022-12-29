@@ -8,9 +8,15 @@ namespace Client
     {
         static void Main(string[] args)
         {
-            DirectoryInfo dir = new DirectoryInfo(@"C:\My_Job\");
-            FileInfo[] fileInfo = FileWorker.CheckSubFiles(dir, 2).ToArray();
+            DirectoryInfo dir = new DirectoryInfo(@"C:\test\");
+            FileInfo[] fileInfo = FileSystemInfo.CheckSubFiles(dir, 2).ToArray();
 
+            PptClient client = new PptClient("MyPipe", ".", 10000);
+            client.Start();
+
+            FileWorker.SendFile(fileInfo[0], client);
+
+            client.Close();
         }        
     }
 }

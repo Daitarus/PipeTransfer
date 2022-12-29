@@ -2,12 +2,12 @@
 
 namespace PipeProtocolTransport
 {
-    public sealed class Client
+    public sealed class PptClient
     {
         private NamedPipeClientStream pipeStream;
         private int timeWaitConnection;
 
-        public Client(string pipeName, string serverName, int timeWaitConnection)
+        public PptClient(string pipeName, string serverName, int timeWaitConnection)
         {
             if(pipeName == null)
                 throw new ArgumentNullException(nameof(pipeName));

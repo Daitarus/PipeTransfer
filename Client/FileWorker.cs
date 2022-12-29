@@ -1,66 +1,63 @@
-﻿using PipeProtocolTransport;
-using System.IO;
+﻿using CommandsKit;
+using PipeProtocolTransport;
+using System.Text;
 
 namespace Client
 {
-    internal class FileWorker
+    internal static class FileWorker
     {
-        public static List<FileInfo> CheckFiles(DirectoryInfo directoryInfo)
+        public static byte[] ReadFileBlock(FileInfo fileInfo, long start, int length)
         {
-            List<FileInfo> filesInfo = new List<FileInfo>();
+            byte[] fileBlock = new byte[0];
 
-            if(directoryInfo.Exists)
+            if (fileInfo.Exists)
             {
-                try
+                if (fileInfo.Length < start + length)
                 {
-                    filesInfo.AddRange(directoryInfo.GetFiles());
+                    length = (int)(fileInfo.Length - start);
                 }
-                catch { }
+
+                fileBlock = new byte[length];
+
+                using (FileStream fstream = File.Open(fileInfo.FullName, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    fstream.Seek(start, SeekOrigin.Begin);
+                    fstream.Read(fileBlock);
+                }
             }
 
-            return filesInfo;
+            return fileBlock;
         }
 
-        public static List<DirectoryInfo> CheckDirectories(DirectoryInfo directory, int numStep = -1)
+        public static void SendFile(FileInfo fileInfo, PptClient client)
         {
-            List<DirectoryInfo> subDirectories = new List<DirectoryInfo>();
-
-            if (numStep > 0) 
-                numStep--;
-
-            if(directory.Exists)
+            if (fileInfo.Exists)
             {
-                try
+                byte[] fileInfoBytes = Encoding.UTF8.GetBytes(fileInfo.Name);
+
+                int maxLengthBlock = Command.maxLengthData - 3 - fileInfoBytes.Length;
+                byte amountBlocks = (byte)Math.Ceiling((double)fileInfo.Length / (double)maxLengthBlock);
+
+                for (byte i = 0; i < amountBlocks; i++) 
                 {
-                    List<DirectoryInfo> thisSubDirectories = new List<DirectoryInfo>();
-                    thisSubDirectories.AddRange(directory.GetDirectories());
-
-                    foreach(DirectoryInfo dir in thisSubDirectories)
-                    {
-                        subDirectories.Add(dir);
-
-                        if(numStep!=0)
-                            subDirectories.AddRange(CheckDirectories(dir, numStep));
-                    }
+                    if(i == amountBlocks - 1)
+                    { }
+                    byte[] fileBlock = ReadFileBlock(fileInfo, i * maxLengthBlock, maxLengthBlock);
+                    SendFileBlock(i, fileInfoBytes, fileBlock, client);
                 }
-                catch { }
             }
-
-            return subDirectories;
         }
 
-        public static List<FileInfo> CheckSubFiles(DirectoryInfo directory, int numStep = -1)
+        private static void SendFileBlock(byte numBlock, byte[] fileInfo, byte[] fileBlock, PptClient client)
         {
-            List<FileInfo> allFileInfo = new List<FileInfo>();
+            Command com = new FileRequest(numBlock, fileInfo, fileBlock);
+            client.SendCommand(com);
+        }
 
-            List<DirectoryInfo> subDirectories = CheckDirectories(directory, numStep);
-
-            foreach(DirectoryInfo dir in subDirectories)
-            {
-                allFileInfo.AddRange(CheckFiles(dir));
-            }
-
-            return allFileInfo;
+        private static void SendFileBlock(byte numBlock, string fileInfo, byte[] fileBlock, PptClient client)
+        {
+            Command com = new FileRequest(numBlock, fileInfo, fileBlock);
+            client.SendCommand(com);
         }
     }
 }
