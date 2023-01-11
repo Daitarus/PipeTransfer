@@ -22,7 +22,9 @@ namespace PipeProtocolTransport
 
         public void Start()
         {
+            FileStream? fileStream = null;
             Transport transport = new Transport(pipeStream);
+
             try
             {
                 pipeStream.WaitForConnection();
@@ -31,7 +33,7 @@ namespace PipeProtocolTransport
                 {
                     byte[] buffer = transport.GetData();
                     Command com = determinant.Define(buffer);
-                    com.ExecuteCommand(transport);
+                    com.ExecuteCommand(transport, ref fileStream);
                 }
             }
             catch(Exception ex)

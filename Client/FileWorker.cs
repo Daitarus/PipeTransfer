@@ -6,25 +6,17 @@ namespace Client
 {
     internal static class FileWorker
     {
-        public static byte[] ReadFileBlock(FileInfo fileInfo, long start, int length)
+        private static DateTime time = DateTime.MinValue;
+
+        private static byte[] ReadFileBlock(FileStream fileStream, long start, int lengthBlock, long lengthFile)
         {
-            byte[] fileBlock = new byte[0];
+            if (lengthFile < start + lengthBlock)
+                lengthBlock = (int)(lengthFile - start);
 
-            if (fileInfo.Exists)
-            {
-                if (fileInfo.Length < start + length)
-                {
-                    length = (int)(fileInfo.Length - start);
-                }
+            byte[] fileBlock = new byte[lengthBlock];
 
-                fileBlock = new byte[length];
-
-                using (FileStream fstream = File.Open(fileInfo.FullName, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    fstream.Seek(start, SeekOrigin.Begin);
-                    fstream.Read(fileBlock);
-                }
-            }
+            fileStream.Seek(start, SeekOrigin.Begin);
+            fileStream.Read(fileBlock);
 
             return fileBlock;
         }
@@ -35,29 +27,20 @@ namespace Client
             {
                 byte[] fileInfoBytes = Encoding.UTF8.GetBytes(fileInfo.Name);
 
-                int maxLengthBlock = Command.maxLengthData - 3 - fileInfoBytes.Length;
-                byte amountBlocks = (byte)Math.Ceiling((double)fileInfo.Length / (double)maxLengthBlock);
+                int maxLengthBlock = FileRequest.maxSizeInfoAndData - fileInfoBytes.Length;
+                int amountBlocks = (int)Math.Ceiling((double)fileInfo.Length / (double)maxLengthBlock);
 
-                for (byte i = 0; i < amountBlocks; i++) 
+                using (FileStream fileStream = File.Open(fileInfo.FullName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
-                    if(i == amountBlocks - 1)
-                    { }
-                    byte[] fileBlock = ReadFileBlock(fileInfo, i * maxLengthBlock, maxLengthBlock);
-                    SendFileBlock(i, fileInfoBytes, fileBlock, client);
+                    for (int i = 0; i < amountBlocks; i++)
+                    {
+                        byte[] fileBlock = ReadFileBlock(fileStream, i * maxLengthBlock, maxLengthBlock, fileInfo.Length);
+                        Command com = new FileRequest(i, amountBlocks, fileInfoBytes, fileBlock);
+                        if (!client.SendCommand(com))
+                            break;
+                    }
                 }
             }
-        }
-
-        private static void SendFileBlock(byte numBlock, byte[] fileInfo, byte[] fileBlock, PptClient client)
-        {
-            Command com = new FileRequest(numBlock, fileInfo, fileBlock);
-            client.SendCommand(com);
-        }
-
-        private static void SendFileBlock(byte numBlock, string fileInfo, byte[] fileBlock, PptClient client)
-        {
-            Command com = new FileRequest(numBlock, fileInfo, fileBlock);
-            client.SendCommand(com);
         }
     }
 }

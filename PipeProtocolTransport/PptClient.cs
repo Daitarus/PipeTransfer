@@ -20,20 +20,22 @@ namespace PipeProtocolTransport
             this.timeWaitConnection = timeWaitConnection;
         }
 
-        public void Start()
+        public bool Start()
         {
             try
             {
                 pipeStream.Connect(timeWaitConnection);
+                return true;
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
+                return false;
             }
         }
 
-        public void SendCommand(Command command)
+        public bool SendCommand(Command command)
         {
             if (pipeStream.IsConnected)
             {
@@ -44,6 +46,7 @@ namespace PipeProtocolTransport
                 try
                 {
                     transport.SendData(buffer);
+                    return true;
                 }
                 catch (Exception ex)
                 {
@@ -51,6 +54,8 @@ namespace PipeProtocolTransport
                     Console.WriteLine(ex.StackTrace);
                 }
             }
+
+            return false;
         }
 
         public void Close()

@@ -8,6 +8,6 @@
 
         public abstract byte[] ToBytes();
 
-        public abstract void ExecuteCommand(Transport transport);
+        public abstract void ExecuteCommand(Transport transport, ref FileStream fileStream);
     }
 }

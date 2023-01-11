@@ -25,7 +25,7 @@ namespace CommandsKit
             return data;
         }
 
-        public override void ExecuteCommand(Transport transport) { }
+        public override void ExecuteCommand(Transport transport, ref FileStream? fileStream) { }
 
         public static UnknowCom ToCommand(byte[]? data)
         {

@@ -7,16 +7,26 @@ namespace Client
     internal class Program
     {
         static void Main(string[] args)
-        {
-            DirectoryInfo dir = new DirectoryInfo(@"C:\test\");
-            FileInfo[] fileInfo = FileSystemInfo.CheckSubFiles(dir, 2).ToArray();
+        { 
+            Console.Write("Enter server name: ");
+            string serverName = Console.ReadLine();
 
-            PptClient client = new PptClient("MyPipe", ".", 10000);
-            client.Start();
+            PptClient client = new PptClient("MyPipe", serverName, 10000);
 
-            FileWorker.SendFile(fileInfo[0], client);
+            if (client.Start())
+            {
+                Console.WriteLine("Connect!");
+                Console.Write("Enter file name: ");
+                string fileName = Console.ReadLine();
+                FileInfo fileInfo = new FileInfo(fileName);
+
+                FileWorker.SendFile(fileInfo, client);
+            }
 
             client.Close();
+
+            Console.WriteLine("End!");
+            Console.ReadKey();
         }        
     }
 }

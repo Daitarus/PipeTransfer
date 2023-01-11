@@ -10,6 +10,9 @@ namespace Server
             PptServer server = new PptServer("MyPipe", new ComDeterminant());
             server.Start();
             server.Close();
+
+            Console.ReadKey();
+
         }
     }
 }

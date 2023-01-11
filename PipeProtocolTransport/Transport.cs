@@ -1,10 +1,11 @@
-﻿using System.IO.Pipes;
+﻿using System.IO;
+using System.IO.Pipes;
 
 namespace PipeProtocolTransport
 {
     public sealed class Transport
     {
-        public const int maxLengthData = 16581375;   //16Mb
+        public const int maxLengthData = 1024;
 
         PipeStream pipeStream;
 
@@ -44,12 +45,7 @@ namespace PipeProtocolTransport
                 throw new Exception($"Size buffer {nameof(pipeStream)} must be less than {maxLengthData}");
 
             byte[] data = new byte[length];
-            int byteCounter = 0, byteCounterOld = 0;
-
-            while (byteCounter < length)
-            {
-                byteCounter += pipeStream.Read(data, 0, length - byteCounterOld);
-            }
+            pipeStream.Read(data, 0, length);
 
             return data;
         }
