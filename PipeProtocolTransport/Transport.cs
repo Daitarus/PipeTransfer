@@ -1,11 +1,10 @@
-﻿using System.IO;
-using System.IO.Pipes;
+﻿using System.IO.Pipes;
 
 namespace PipeProtocolTransport
 {
     public sealed class Transport
     {
-        public const int maxLengthData = 1024;
+        public const int maxLengthData = 33200;
 
         PipeStream pipeStream;
 

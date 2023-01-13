@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandsKit", "CommandsKit\CommandsKit.csproj", "{A239628B-E8AE-4B36-AC6A-8A67C8AB62D7}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleWorker", "ConsoleWorker\ConsoleWorker.csproj", "{22405C85-5F90-4618-817B-050289A5B9B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A239628B-E8AE-4B36-AC6A-8A67C8AB62D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A239628B-E8AE-4B36-AC6A-8A67C8AB62D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A239628B-E8AE-4B36-AC6A-8A67C8AB62D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22405C85-5F90-4618-817B-050289A5B9B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22405C85-5F90-4618-817B-050289A5B9B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22405C85-5F90-4618-817B-050289A5B9B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22405C85-5F90-4618-817B-050289A5B9B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

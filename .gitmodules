@@ -1,0 +1,3 @@
+[submodule "ConsoleWorker"]
+	path = ConsoleWorker
+	url = https://github.com/Daitarus/ConsoleWorker.git
