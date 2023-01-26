@@ -51,7 +51,7 @@ namespace CommandsKit
             return data.ToArray();
         }
 
-        public override void ExecuteCommand(Transport transport, ref FileStream? fileStream)
+        public override void ExecuteCommand(Transport transport, ref FileStream fileStream)
         {
             if (numBlock == 0)
             {

@@ -36,7 +36,7 @@ namespace PipeProtocolTransport
                     com.ExecuteCommand(transport, ref fileStream);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);

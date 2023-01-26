@@ -6,7 +6,7 @@ namespace PipeProtocolTransport
     {
         public const int maxLengthData = 33200;
 
-        PipeStream pipeStream;
+        private PipeStream pipeStream;
 
         public Transport(PipeStream pipeStream)
         {

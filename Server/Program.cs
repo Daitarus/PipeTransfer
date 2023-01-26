@@ -7,12 +7,12 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            PptServer server = new PptServer("MyPipe", new ComDeterminant());
-            server.Start();
-            server.Close();
-
-            Console.ReadKey();
-
+            while (true)
+            {
+                PptServer server = new PptServer("MyPipe", new ComDeterminant());
+                server.Start();
+                server.Close();
+            }
         }
     }
 }
