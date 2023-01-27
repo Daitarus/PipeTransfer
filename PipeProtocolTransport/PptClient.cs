@@ -7,6 +7,8 @@ namespace PipeProtocolTransport
         private NamedPipeClientStream pipeStream;
         private int timeWaitConnection;
 
+        public bool IsConnected { get { return pipeStream.IsConnected; } }
+
         public PptClient(string pipeName, string serverName, int timeWaitConnection)
         {
             if(pipeName == null)
