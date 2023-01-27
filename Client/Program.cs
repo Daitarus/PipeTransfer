@@ -1,6 +1,4 @@
-﻿using CommandsKit;
-using PipeProtocolTransport;
-using System.IO;
+﻿using PipeProtocolTransport;
 using ScanFileSystem;
 using System.Configuration;
 using System.Reflection;
