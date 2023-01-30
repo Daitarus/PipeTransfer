@@ -1,4 +1,5 @@
 ﻿using PipeProtocolTransport;
+using System;
 
 namespace CommandsKit
 {

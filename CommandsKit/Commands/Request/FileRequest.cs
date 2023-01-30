@@ -2,6 +2,9 @@
 using System.Text;
 using System.Configuration;
 using System.Data;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace CommandsKit
 {
@@ -81,7 +84,7 @@ namespace CommandsKit
             if(fileStream == null)
                 throw new ArgumentNullException(nameof(fileStream));
 
-            fileStream.Write(fileData);
+            fileStream.Write(fileData, 0, fileData.Length);
 
             if (numBlock == allBlock - 1)
                 fileStream?.Close();
@@ -96,12 +99,12 @@ namespace CommandsKit
 
             byte[] numBlockBytes = new byte[4];
             Array.Copy(data, startPosition, numBlockBytes, 0, numBlockBytes.Length);
-            int numBlock = BitConverter.ToInt32(numBlockBytes);
+            int numBlock = BitConverter.ToInt32(numBlockBytes, 0);
             startPosition += numBlockBytes.Length;
 
             byte[] allBlockBytes = new byte[4];
             Array.Copy(data, startPosition, allBlockBytes, 0, allBlockBytes.Length);
-            int allBlock = BitConverter.ToInt32(allBlockBytes);
+            int allBlock = BitConverter.ToInt32(allBlockBytes, 0);
             startPosition += allBlockBytes.Length;
 
             byte fileInfoLength = data[startPosition];

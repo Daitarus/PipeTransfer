@@ -2,6 +2,6 @@
 {
     public interface IDeterminant
     {
-        public Command Define(byte[] buffer);
+        Command Define(byte[] buffer);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace PipeProtocolTransport
+﻿using System.IO;
+
+namespace PipeProtocolTransport
 {
     public abstract class Command
     {

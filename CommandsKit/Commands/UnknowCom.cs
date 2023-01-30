@@ -1,11 +1,13 @@
 ﻿using PipeProtocolTransport;
+using System;
+using System.IO;
 
 namespace CommandsKit
 {
     public class UnknowCom : Command
     {
         public readonly byte[] bytes = new byte[0];
-        public UnknowCom(byte[]? bytes)
+        public UnknowCom(byte[] bytes)
         {
 
             typeCom = (byte)TypeCommand.UNKNOW;
@@ -25,9 +27,9 @@ namespace CommandsKit
             return data;
         }
 
-        public override void ExecuteCommand(Transport transport, ref FileStream? fileStream) { }
+        public override void ExecuteCommand(Transport transport, ref FileStream fileStream) { }
 
-        public static UnknowCom ToCommand(byte[]? data)
+        public static UnknowCom ToCommand(byte[] data)
         {
             return new UnknowCom(data);
         }

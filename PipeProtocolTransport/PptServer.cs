@@ -1,4 +1,6 @@
-﻿using System.IO.Pipes;
+﻿using System;
+using System.IO;
+using System.IO.Pipes;
 using System.Security.AccessControl;
 using System.Security.Principal;
 
@@ -16,13 +18,13 @@ namespace PipeProtocolTransport
 
             PipeSecurity pipeSecurity = new PipeSecurity();
             pipeSecurity.AddAccessRule(new PipeAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), PipeAccessRights.ReadWrite, AccessControlType.Allow));
-            pipeStream = NamedPipeServerStreamAcl.Create(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.None, 0, 0, pipeSecurity);
+            pipeStream = new NamedPipeServerStream(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.None, 0, 0, pipeSecurity);
             this.determinant = determinant;
         }
 
         public void Start()
         {
-            FileStream? fileStream = null;
+            FileStream fileStream = null;
             Transport transport = new Transport(pipeStream);
 
             try

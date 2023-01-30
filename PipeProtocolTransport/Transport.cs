@@ -1,4 +1,6 @@
-﻿using System.IO.Pipes;
+﻿using System;
+using System.Collections.Generic;
+using System.IO.Pipes;
 
 namespace PipeProtocolTransport
 {
@@ -38,7 +40,7 @@ namespace PipeProtocolTransport
 
             byte[] lengthBytes = new byte[4];
             pipeStream.Read(lengthBytes, 0, lengthBytes.Length);
-            int length = BitConverter.ToInt32(lengthBytes);
+            int length = BitConverter.ToInt32(lengthBytes, 0);
 
             if (length > maxLengthData)
                 throw new Exception($"Size buffer {nameof(pipeStream)} must be less than {maxLengthData}");
