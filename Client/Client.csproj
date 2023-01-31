@@ -40,6 +40,8 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Net" />
     <Reference Include="System.Security" />
     <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -62,6 +64,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileTransport.cs" />
+    <Compile Include="FileWork.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -70,9 +74,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommandsKit\CommandsKit.csproj">
+      <Project>{dfba6efc-871e-4291-9647-5282cea5983c}</Project>
+      <Name>CommandsKit</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PipeProtocolTransport\PipeProtocolTransport.csproj">
       <Project>{ed1deaef-acde-4941-8a11-6d4172f54618}</Project>
       <Name>PipeProtocolTransport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScanFileSystem\ScanFileSystem.csproj">
+      <Project>{73f4ba25-289e-4303-9869-d9fe80cc30d7}</Project>
+      <Name>ScanFileSystem</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

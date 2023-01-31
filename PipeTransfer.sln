@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PipeProtocolTransport", "PipeProtocolTransport\PipeProtocolTransport.csproj", "{ED1DEAEF-ACDE-4941-8A11-6D4172F54618}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScanFileSystem", "ScanFileSystem\ScanFileSystem.csproj", "{73F4BA25-289E-4303-9869-D9FE80CC30D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{ED1DEAEF-ACDE-4941-8A11-6D4172F54618}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED1DEAEF-ACDE-4941-8A11-6D4172F54618}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED1DEAEF-ACDE-4941-8A11-6D4172F54618}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73F4BA25-289E-4303-9869-D9FE80CC30D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73F4BA25-289E-4303-9869-D9FE80CC30D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73F4BA25-289E-4303-9869-D9FE80CC30D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73F4BA25-289E-4303-9869-D9FE80CC30D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
